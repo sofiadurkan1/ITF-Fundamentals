@@ -1,0 +1,38 @@
+1. 
+SELECT albums.Title AS album_name, COUNT(trackId)
+FROM  tracks
+INNER JOIN albums ON 
+tracks.AlbumId = albums.AlbumId
+GROUP BY albums.AlbumId
+ORDER BY COUNT(TrackId) DESC;
+
+2. 
+SELECT t.name, a.Title
+FROM tracks t
+INNER JOIN albums a
+ON t.AlbumId = a.AlbumId;
+
+3.
+SELECT  MIN(t.Milliseconds)  AS 'Track Minimum Duration', a.AlbumId, a.Title, t.name 
+FROM tracks t
+INNER JOIN albums a
+ON t.AlbumId = a.AlbumId
+GROUP BY a.AlbumId
+ORDER BY MIN(t.Milliseconds) DESC;
+
+4.
+SELECT  a.AlbumId, a.Title, t.name,  SUM(t.Milliseconds) AS 'Album Total Duration' 
+FROM tracks t
+INNER JOIN albums a
+ON t.AlbumId = a.AlbumId
+GROUP BY a.AlbumId
+ORDER BY SUM(t.Milliseconds) DESC;
+
+
+5.
+SELECT title, SUM(Milliseconds)
+FROM tracks
+INNER JOIN albums ON tracks.AlbumId = albums.AlbumId
+WHERE Milliseconds > 70 * 60000
+GROUP BY Albums.Title
+HAVING SUM(Tracks.Milliseconds) > 70 * 60000;

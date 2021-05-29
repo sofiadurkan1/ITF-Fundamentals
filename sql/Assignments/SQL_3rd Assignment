@@ -1,0 +1,74 @@
+Assignment 3:
+
+1. 
+SELECT TrackId, name, MAX(Milliseconds) AS max_duration
+FROM tracks
+
+2. 
+SELECT TrackId, name, MIN(Milliseconds) AS min_duration
+FROM tracks
+
+3.
+SELECT TrackId, name, Bytes, AVG(Bytes) AS avg_bytes
+FROM tracks
+GROUP BY AlbumId
+ORDER BY avg_bytes DESC
+
+
+-- Multiple-Row Subqueries:
+
+1. 
+SELECT CustomerId, FirstName, LastName
+FROM customers 
+WHERE SupportRepId IN (SELECT EmployeeId
+FROM employees 
+WHERE FirstName IN ('Jane', 'Margaret') 
+AND LastName IN ('Peacock', 'Park'))
+
+2.
+SELECT c.CustomerId, c.FirstName, c.LastName
+FROM customers c
+JOIN employees e ON e.EmployeeId = c.SupportRepId
+WHERE e.FirstName IN ('Jane', 'Margaret') 
+AND e.LastName IN ('Peacock', 'Park');
+
+
+DDL (CREATE, ALTER, DELETE) and DML (SELECT, INSERT, UPDATE, DELETE) Statements
+
+1.
+CREATE TABLE courses
+	(CourseId INT PRIMARY KEY,
+	 CourseName TEXT NOT NULL,
+	 EmployeeId INT 
+	 CoursePrice REAL,
+	 FOREIGN KEY (EmployeeId) REFERENCES employees (EmployeeId));
+
+2.
+INSERT INTO courses
+(course_id, course_name, course_price, EmployeeId)
+VALUES
+(101, 'Python', 3000, 1),
+(201, 'Linux', 5000, 2),
+(301, 'Git', 2000, 3),
+(401, 'Agile', 1000, 4),
+(501, 'AWS', 7000, 5);
+
+
+3.
+DELETE FROM courses
+WHERE course_id = (SELECT MAX(course_id) FROM courses)
+
+4. 
+ALTER TABLE courses
+ADD Start_Date datetime;
+
+
+5.
+ALTER TABLE courses
+DROP course_price;
+
+6.
+DROP TABLE courses;
+
+
+
