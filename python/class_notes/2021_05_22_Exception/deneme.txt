@@ -1,0 +1,1 @@
+Sometimes it may take time to know if you are using the correct encoding in your file. Therefore, if the file you're trying to open looks unusual or wrong, or gives an error, you might need to deal with this parameter a bit.çşöüığ
